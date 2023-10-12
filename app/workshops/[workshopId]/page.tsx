@@ -1,9 +1,15 @@
-export default function Workshop({ params }) {
+import Link from "next/link";
+
+export default function Workshop({
+  params,
+}: {
+  params: { workshopId: string };
+}) {
   return (
     <main className="">
       <h1>Workshop #{params.workshopId}</h1>
-      <a href="/workshops">Back</a>
-      <a href="/">Home</a>
+      <Link href="/workshops">Back</Link>
+      <Link href="/">Home</Link>
     </main>
   );
 }
