@@ -13,6 +13,7 @@ export default function Workshop({
   return (
     <main className="">
       <h1>Workshop #{workshop.name}</h1>
+      <img src={workshop.photoUrl} alt={workshop.name} />
       <Link href="/workshops">Back</Link>
       <Link href="/">Home</Link>
     </main>

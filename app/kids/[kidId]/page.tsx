@@ -28,7 +28,7 @@ export default function Kid({ params }: { params: { kidId: string } }) {
       {availableWorkshops.map((workshop) => (
         <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
           {workshop.name}
-          {/* <img src={workshop.photoUrl} alt={workshop.name} /> */}
+          <img src={workshop.photoUrl} alt={workshop.name} />
         </Link>
       ))}
 
@@ -61,6 +61,7 @@ function Session({
   return (
     <div>
       <h3>Session {workshop.name}</h3>
+      <img src={workshop.photoUrl} alt={workshop.name} />
       <p>Tried: {new Date(session.triedAt).toISOString()}</p>
       <p>
         Succeded:{" "}

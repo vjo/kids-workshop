@@ -9,6 +9,7 @@ export default function Workshops() {
       {workshops.map((workshop) => (
         <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
           {workshop.name}
+          <img src={workshop.photoUrl} alt={workshop.name} />
         </Link>
       ))}
     </main>
