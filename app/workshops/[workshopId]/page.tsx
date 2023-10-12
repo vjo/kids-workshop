@@ -1,3 +1,4 @@
+import { useWorkshop } from "@/app/dataStore";
 import Link from "next/link";
 
 export default function Workshop({
@@ -5,9 +6,13 @@ export default function Workshop({
 }: {
   params: { workshopId: string };
 }) {
+  const workshop = useWorkshop({ workshopId: params.workshopId });
+  if (!workshop) {
+    return <main>Workshop not found 🚨</main>;
+  }
   return (
     <main className="">
-      <h1>Workshop #{params.workshopId}</h1>
+      <h1>Workshop #{workshop.name}</h1>
       <Link href="/workshops">Back</Link>
       <Link href="/">Home</Link>
     </main>

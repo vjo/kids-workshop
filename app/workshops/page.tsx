@@ -1,11 +1,16 @@
 import Link from "next/link";
+import { useWorkshops } from "@/app/dataStore";
 
 export default function Workshops() {
+  const workshops = useWorkshops();
   return (
     <main className="">
       <h1>Workshops</h1>
-      <Link href="/workshops/1">#1</Link>
-      <Link href="/workshops/2">#2</Link>
+      {workshops.map((workshop) => (
+        <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
+          {workshop.name}
+        </Link>
+      ))}
     </main>
   );
 }
