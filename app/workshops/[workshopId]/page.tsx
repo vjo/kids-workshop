@@ -1,3 +1,4 @@
+"use client";
 import { useWorkshop } from "@/app/dataStore";
 import Link from "next/link";
 

@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import {
   useAvailableWorkshopsForKid,
   useKid,
+  useMarkSessionAsSuccessfull,
+  useSessionForKidAndWorkshop,
+  useStartSession,
   useSuccessfullSessionsForKid,
   useWorkshop,
 } from "@/app/dataStore";
 import Link from "next/link";
 
-export default function Kid({ params }: { params: { kidId: string } }) {
+export default function KidPage({ params }: { params: { kidId: string } }) {
   const kid = useKid({ kidId: params.kidId });
   const availableWorkshops = useAvailableWorkshopsForKid({
     kidId: params.kidId,
@@ -15,6 +19,7 @@ export default function Kid({ params }: { params: { kidId: string } }) {
   const successfullSessions = useSuccessfullSessionsForKid({
     kidId: params.kidId,
   });
+
   if (!kid) {
     return <main>Kid not found 🚨</main>;
   }
@@ -26,10 +31,7 @@ export default function Kid({ params }: { params: { kidId: string } }) {
 
       <h2>Available workshops</h2>
       {availableWorkshops.map((workshop) => (
-        <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
-          {workshop.name}
-          <img src={workshop.photoUrl} alt={workshop.name} />
-        </Link>
+        <AvailableWorkshop key={workshop.id} workshop={workshop} kid={kid} />
       ))}
 
       <h2>Successfull sessions</h2>
@@ -67,6 +69,54 @@ function Session({
         Succeded:{" "}
         {session.succededAt ? new Date(session.succededAt).toISOString() : "-"}
       </p>
+    </div>
+  );
+}
+
+function AvailableWorkshop({ kid, workshop }: { kid: any; workshop: any }) {
+  const existingSession = useSessionForKidAndWorkshop({
+    kidId: kid.id,
+    workshopId: workshop.id,
+  });
+  const startSession = useStartSession({
+    kidId: kid.id,
+    workshopId: workshop.id,
+  });
+  const markSessionAsSucceded = useMarkSessionAsSuccessfull({
+    kidId: kid.id,
+    workshopId: workshop.id,
+  });
+
+  return (
+    <div>
+      <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
+        {workshop.name}
+        <img src={workshop.photoUrl} alt={workshop.name} />
+      </Link>
+      {existingSession ? (
+        "Already tried"
+      ) : (
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            startSession();
+            window.location.pathname = "/";
+          }}
+        >
+          Start
+        </button>
+      )}
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          markSessionAsSucceded();
+          window.location.pathname = "/";
+        }}
+      >
+        Succeded
+      </button>
     </div>
   );
 }
