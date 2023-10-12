@@ -35,5 +35,28 @@
       "name": "Workshop 3",
       "difficulty": 3
     }
+  ],
+  "sessions": [
+    {
+      "id": "1",
+      "kidId": "1",
+      "workshopId": "1",
+      "triedAt": 1697144305799,
+      "succededAt": null
+    },
+    {
+      "id": "2",
+      "kidId": "1",
+      "workshopId": "2",
+      "triedAt": 1697144351507,
+      "succededAt": 1697144357506
+    },
+    {
+      "id": "3",
+      "kidId": "2",
+      "workshopId": "3",
+      "triedAt": 1697144386630,
+      "succededAt": 1697142386630
+    }
   ]
 }
