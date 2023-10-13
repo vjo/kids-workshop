@@ -2,7 +2,7 @@ name: Build and Deploy Main branch
 on:
   push:
     branches:
-      - vite-pwa
+      - main
 permissions:
   contents: write
 jobs:
