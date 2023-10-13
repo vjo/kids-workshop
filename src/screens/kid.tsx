@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
 import {
   useAvailableWorkshopsForKid,
   useKid,
@@ -8,10 +6,14 @@ import {
   useStartSession,
   useSuccessfullSessionsForKid,
   useWorkshop,
-} from "@/app/dataStore";
-import Link from "next/link";
+} from "@/dataStore";
+import { Link, useParams } from "react-router-dom";
 
-export default function KidPage({ params }: { params: { kidId: string } }) {
+export default function KidPage() {
+  const params = useParams<{ kidId: string }>();
+  if (!params.kidId) {
+    throw new Error("Missing kidId");
+  }
   const kid = useKid({ kidId: params.kidId });
   const availableWorkshops = useAvailableWorkshopsForKid({
     kidId: params.kidId,
@@ -39,8 +41,8 @@ export default function KidPage({ params }: { params: { kidId: string } }) {
         <Session key={session.id} session={session} />
       ))}
 
-      <Link href="/kids">Back</Link>
-      <Link href="/">Home</Link>
+      <Link to="/kids">Back</Link>
+      <Link to="/">Home</Link>
     </main>
   );
 }
@@ -89,7 +91,7 @@ function AvailableWorkshop({ kid, workshop }: { kid: any; workshop: any }) {
 
   return (
     <div>
-      <Link key={workshop.id} href={`/workshops/${workshop.id}`}>
+      <Link key={workshop.id} to={`/workshops/${workshop.id}`}>
         {workshop.name}
         <img src={workshop.photoUrl} alt={workshop.name} />
       </Link>
