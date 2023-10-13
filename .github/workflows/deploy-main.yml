@@ -17,6 +17,8 @@ jobs:
         run: |
           npm ci
           npm run build -- --base /kids-workshop/
+        env:
+          KW_BASENAME: /kids-workshop
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

@@ -7,28 +7,35 @@ import Kid from "./screens/kid";
 import Workshops from "./screens/workshops";
 import Workshop from "./screens/workshop";
 
-const router = createBrowserRouter([
+const basename = import.meta.env.KW_BASENAME ?? "/";
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/kids",
+      element: <Kids />,
+    },
+    {
+      path: "/kids/:kidId",
+      element: <Kid />,
+    },
+    {
+      path: "/workshops",
+      element: <Workshops />,
+    },
+    {
+      path: "/workshops/:workshopId",
+      element: <Workshop />,
+    },
+  ],
   {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/kids",
-    element: <Kids />,
-  },
-  {
-    path: "/kids/:kidId",
-    element: <Kid />,
-  },
-  {
-    path: "/workshops",
-    element: <Workshops />,
-  },
-  {
-    path: "/workshops/:workshopId",
-    element: <Workshop />,
-  },
-]);
+    basename,
+  }
+);
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => router.dispose());
