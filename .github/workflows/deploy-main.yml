@@ -17,6 +17,7 @@ jobs:
         run: |
           npm ci
           npm run build -- --base /kids-workshop/
+          cp dist/index.html dist/404.html
         env:
           KW_BASENAME: /kids-workshop
 
